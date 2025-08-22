@@ -873,6 +873,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<b>[morality_path.name]:</b> [path_score]/10"
 				if ((player_experience >= (path_score * 2)) && (path_score < 10))
 					dat += " <a href='byond://?_src_=prefs;preference=path;task=input'>Increase Path ([path_score * 2])</a>"
+				if ((path_score > 1))
+					dat += "<a href='byond://?_src_=prefs;preference=pathminus;task=input'>Lower Path (Free)</a>"
 				if(!slotlocked)
 					dat += "<a href='byond://?_src_=prefs;preference=pathof;task=input'>Switch Path</a>"
 				dat += "<BR><b>Description:</b> [morality_path.desc]<BR>"
@@ -2811,6 +2813,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					player_experience -= cost
 					experience_used_on_character += cost
 					path_score = clamp(path_score + 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
+
+				if("pathminus")
+					path_score = clamp(path_score - 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
 
 				if("pathof")
 					if(slotlocked || !(pref_species.id == "kindred"))
