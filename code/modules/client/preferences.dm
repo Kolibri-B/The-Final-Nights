@@ -2814,8 +2814,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					experience_used_on_character += cost
 					path_score = clamp(path_score + 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
 
+				// TFN EDIT ADDITION START: Adding the ability to lower your path score
 				if("pathminus")
 					path_score = clamp(path_score - 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
+				// TFN EDIT ADDITION END
 
 				if("pathof")
 					if(slotlocked || !(pref_species.id == "kindred"))
