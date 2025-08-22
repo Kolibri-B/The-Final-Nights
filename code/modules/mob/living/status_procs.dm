@@ -499,12 +499,12 @@
 		if (iskindred(src))
 			var/mob/living/carbon/human/vampire = src
 			var/datum/species/kindred/vampire_species = vampire.dna.species
-			var/torpor_length = 1 SCENES
+			var/torpor_length = 10 MINUTES
 			COOLDOWN_START(vampire_species, torpor_timer, torpor_length)
 		if (iscathayan(src))
 			var/mob/living/carbon/human/cathayan = src
 			var/datum/dharma/dharma = cathayan.mind.dharma
-			var/torpor_length = 1 SCENES
+			var/torpor_length = 10 MINUTES
 			COOLDOWN_START(dharma, torpor_timer, torpor_length)
 
 ///Unignores all slowdowns that lack the IGNORE_NOSLOW flag.
