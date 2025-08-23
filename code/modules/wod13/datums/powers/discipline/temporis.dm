@@ -52,6 +52,7 @@
 
 /datum/discipline_power/temporis/recurring_contemplation/activate(mob/living/target)
 	. = ..()
+	//Roll for degree of success, mentality + social vs mentality in place of manipulation + occult vs willpower
 	var/mypower = owner.get_total_mentality() + owner.get_total_social()
 	var/theirpower = target.get_total_mentality()
 	var/rollsuccess = SSroll.storyteller_roll(mypower, difficulty = theirpower, mobs_to_show_output = owner, numerical = TRUE)
