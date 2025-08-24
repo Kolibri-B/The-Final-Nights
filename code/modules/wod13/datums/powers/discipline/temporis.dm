@@ -26,15 +26,39 @@
 //HOURGLASS OF THE MIND
 /datum/discipline_power/temporis/hourglass_of_the_mind
 	name = "Hourglass of the Mind"
-	desc = "Gain a perfect sense of time. Know exactly when you are."
+	desc = "Gain a perfect sense of time. Know exactly when you are, and share this knowledge with others."
 
 	level = 1
 	check_flags = DISC_CHECK_CONSCIOUS
 	vitae_cost = 0
+	range = 7
 
 /datum/discipline_power/temporis/hourglass_of_the_mind/activate()
 	. = ..()
-	to_chat(owner, "<b>[SScity_time.timeofnight]</b>")
+	//Display time
+	to_chat(owner, "<span class='notice'><b>[SScity_time.timeofnight]</b></span>")
+	//Check range for targets with Temporis and display them, if any exist
+	var/list/targets = list()
+	for(var/mob/living/carbon/human/target in view(range, owner))
+		if(target == owner)
+			continue
+		if(iskindred(target))
+			var/datum/species/kindred/vampire = target.dna.species
+			if(vampire.get_discipline("Temporis"))
+				targets += target
+	if(targets.len)
+		var/target_list = ""
+		for(var/i = 1 to targets.len)
+			var/mob/living/carbon/human/target = targets[i]
+			target_list += target.name
+			if(i < targets.len - 1)
+				target_list += ", "
+			else if(i == targets.len - 1)
+				target_list += " and "
+		to_chat(owner, "<span class='notice'>[english_list(targets)] [targets.len == 1 ? "has" : "have"] temporal distortions around [targets.len == 1 ? "themself" : "themselves"].</span>")
+	else
+		to_chat(owner, "<span class='notice'>There are no temporal distortions nearby.</span>")
+	return TRUE
 
 //RECURRING CONTEMPLATION
 /datum/discipline_power/temporis/recurring_contemplation
